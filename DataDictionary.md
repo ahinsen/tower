@@ -1,5 +1,19 @@
-#Data dictionary
-Simple typtes
+# Data dictionary
+
+All data that may be shared between server and other levels (devices, gateways, or clients) must be defined precisely and registered in the server database. Data definitions belong to:
+- A scope
+	- Global - Data name should be globally (in the tower) unique
+	- Device specific - Data name should be unique for a certain device type. Abstract and derived device types form a tree like in the object oriented concept:
+
+End-Device - <list of end-device level data definitions> 
++---Battery device - <list of battery-device specific data definitions>
+	+---MyDeviceCategory - <list of category specific data definitions>
+		+---MyDeviceType - <list of application specific data definitions>
+
+- A software version (either framework version or application version)
+
+Simple types
+------------
 	Numeric type code (1 byte)
 		1-2 Length (2^n where n=0, 1, 2,or 3) 
 		3-4 0-Fixed unsigned / 1-Fixed signed / 2-float(IEE754) / 3-other (16bit:Half 1,5,11, 32bit:Single 1,8,24, 64bit:Double 1,11,52)
@@ -16,23 +30,14 @@ Simple typtes
 	C representation examples of simple types:
 	
 Complex types
+-------------
 	List of <Element name(string of  1-10 ASCII characters)> - <simple type> 
 	Array length (1 byte) (0,1: not an array (single), 2-255:array)
 	
 Data definition
+---------------
 	<Name(string of  1-10 ASCII characters)> - <simple type>
 	<Name(string of  1-10 ASCII characters)> - <complex type>
 	In order to force simplicity, nested complex types are not preferred (this statement may be revised later)
 	
-All data that may be shared between server and other levels (devices, gateways, or clients) must be defined precisely and registered in the server database. Data definitions belong to:
-- A scope
-	- Global - Data name should be globally (in the tower) unique
-	- Device specific - Data name should be unique for a certain device type. Abstract and derived device types form a tree like in the object oriented concept:
-
-End-Device - <list of end-device level data definitions> 
-+---Battery device - <list of battery-device specific data definitions>
-	+---MyDeviceCategory - <list of category specific data definitions>
-		+---MyDeviceType - <list of application specific data definitions>
-
-- A software version (either framework version or application version)
 
