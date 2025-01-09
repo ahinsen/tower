@@ -1,10 +1,57 @@
 # Data dictionary
 
-The Data dictionary contains data type/structure definitions for database content, and for communicating to other levels (end-devices, gateways, or clients).
+The Data dictionary contains data type/structure definitions for database content, and APIs to other levels (end-devices, gateways, or clients).
 
-Database content
-End-device
-- Device ID
+Device type hirarchy
+--------------------
+
+	Device
+	|
+	+---End-Device 
+	|   |
+	|   +---Battery device 
+	|   |   |
+	|   |   +---MyDeviceType (Application specific device type)
+	|   |
+ 	|   +---Power device 
+	|
+	+---Gateway 
+
+Battery device 
+--------------
+
+config parameters:
+- Next wake-up interval
+- General wake-up interval
+- Wake-up type
+- Wake-up pin
+- Battery full voltage
+- Battery empty voltage
+- Channel list
+- Channel retry count
+- Reply timeout
+
+Sensor reading data:
+- Battery voltage
+
+- 
+
+
+and type dependent data elements
+
+Device
+- Data elements
+	- Device ID
+- Extensions:
+	- End-device
+		- Data elements
+ 		- Extensions
+   			- Battery device
+      				- Data elements
+        				- ConfSetting:NextWakeupInterval
+        				- ConfSetting:GeneralWakeupInterval
+ - Gateway 
+
 
 
 
