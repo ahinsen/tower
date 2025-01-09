@@ -1,6 +1,14 @@
 # Data dictionary
 
-All data that may be shared between server and other levels (devices, gateways, or clients) must be defined precisely and registered in the server database. Data definitions belong to:
+The Data dictionary contains data type/structure definitions for database content, and for communicating to other levels (end-devices, gateways, or clients).
+
+Database content
+End-device
+- Device ID
+
+
+
+must be defined precisely and registered in the server database. Data definitions belong to:
 - A scope
 	- Global - Data name should be globally (in the tower) unique
 	- Device specific - Data name should be unique for a certain device type. Abstract and derived device types form a tree like in the object oriented concept:
