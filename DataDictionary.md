@@ -1,6 +1,6 @@
 # Data dictionary
 
-The Data dictionary contains data type/structure definitions for database content, and APIs to other levels (end-devices, gateways, or clients).
+The Data dictionary contains data type/structure definitions for database content, and APIs to other levels of the tower (end-devices, gateways, or clients).
 
 Device type hirarchy
 --------------------
@@ -37,20 +37,10 @@ Sensor reading data:
 - 
 
 
-and type dependent data elements
 
-Device
-- Data elements
-	- Device ID
-- Extensions:
-	- End-device
-		- Data elements
- 		- Extensions
-   			- Battery device
-      				- Data elements
-        				- ConfSetting:NextWakeupInterval
-        				- ConfSetting:GeneralWakeupInterval
- - Gateway 
+ Gateway 
+ -------
+ 
 
 
 
