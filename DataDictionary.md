@@ -34,12 +34,9 @@ config parameters:
 Sensor reading data:
 - Battery voltage
 
-- 
 
-
-
- Gateway 
- -------
+Gateway 
+-------
  
 
 
