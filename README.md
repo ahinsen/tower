@@ -43,17 +43,22 @@ Database
 --------
 The database contains the following main sections:
 - Device registry: This is a central registry of all devices including both end-devices and gateways. In addition to the basic attributes, each device has a set of configuration parameters. The config parameter set of a certain device depends on the device type. Parameter values can be maintained on the server (see DevOpsAPI) and are synchronized to the individuel devices (see DeviceAPI).
-- Device log: Device events are logged locally in the devices, and device logs are synchronized to the server via the DeviceAPI. Device log entries are not measured data, but the information that is needed for the appropriate remote maintenance of the devices (sensor status, sensor reading errors, battery status, etc.).
+- Device log: In addition to measuring and sending measured data, devices register some events into their local event log, that is needed for the appropriate remote maintenance of the devices (e.g. start/stop events, sensor status, sensor reading errors, communication status, battery status, etc.). These local device logs are then synchronized to the server via the DeviceAPI. 
 - Entity registry: A registry of real world objects that are necessary for operationg the iot tower.  Entities describe the technology that is operated using the devices, typically a location hierarchy (e.g.plant/building/room) and technology devices (e.g. machines in a plant, or a window at home) An entity:
   - Has a unique id and a name.
   - May have references to other entities. E.g. a room as an entity may reference to a building where it is located.
   - May have attributes that are necessary when building complex queries. E.g. the surface of a window may be necessary, if we want to analyze the change in the heating pattern during airing.
   - May have a life-cycle described by a state-machine. E.g. a production batch may be in planned/processing/ready states, and may have the start/finish events triggering the state transitions.
-- Data monitor: This section consists of several levels of sensed data. The readings from the devices gets processed on different levels:
+- Process monitor: This section consists of
+  -  Quantity series: Each quantity series is a time series of values that describe the time dependency of a certain quantity. The quantity can be either directly measured by a device and received yia the deviceAPI, or imported from external sources via the clientAPI, or it can be a derived quantity as a result of an internal calculation logic e.g. average temperature of the house. 
+  -  Events: An event has a type (that describes WHAT has happened) and a time (WHEN). Similarly to series, the same 3 sources are valid for events as well: Sensed/External/Derived. Examples are sensed status changes (e.g. window open/close) or a command issued / a setting changed by a client, or alarms (e.g. temperature is over a limit). 
+...
+The readings from the devices get processed on different levels:
   - Messages: Messages received from devices are saved in their original form, without parsing or interpreting their content. This dataset also serves as a message log.
   - Sensed values: Messages are interpreted and processed into the sensed values data set. This dataset has one record per sensor per reading
   - Additional data sets for higher level interpretation of sensed data. E.g. a car entering a gate may be just one entry in the "entries" data set, being derived from several 10th of sensed values ( e.g. object arrived licence plate recognized, gate opened, gate closed, ...)
   - This multi-level concept also supports optimal archiving. An entry that is successfully processed for higher levels, can be archived. E.g. messages that are completely and successfully processed into sensed values are not necessary to keep any longer, or similarly gate status changes can be derived from entries, therefore are not needed in their original form. On the other side entries that are not successfully processed should remain to support root cause analysis.
+... 
 - Data dictionary: The data distionary contains a type hierarchy for devices, entities, and API messages. All data elements of the abovementioned database sections and the API messages are defined in the data dictionary. Some part of the data dictionary belongs to the framework (e.g. basic device types) and is not modifiable by an application. Application specific types and their data elements extend the basic type tree contained by the framwork.
 - APIs towards clients:
   -  
